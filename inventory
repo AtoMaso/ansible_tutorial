@@ -1,2 +1,4 @@
-192.168.31.149
+
+[webservers]
+192.168.31.149 ansible_ssh_user=msrbinovski ansible_ssh_private_key_file=~/.ssh/ansible
 
