@@ -1,0 +1,15 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: remove net-tools package
+    yum:
+      name: net-tools
+      state: absent
+  - name: remove make package
+    yum:
+      name: make
+      state: absent
+

@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install net-tools package
+    yum:
+      name: net-tools
+      state: latest
+
+  - name: install make package
+    yum:
+      name: make
+      state: latest
+
