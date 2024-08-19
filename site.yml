@@ -1,0 +1,66 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks: # running this before tasks
+
+  - name: install updates (RedHat)
+    yum:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "RedHat"
+
+  - name: install updates (Ubuntu)
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution  == "Ubuntu"     
+
+
+- hosts: web_servers
+  become: true
+  tasks:
+
+  - name: install apache2 and php packages on ubuntu
+    apt:  
+      name:
+        - apache2       
+        - libapache2-mod-php
+      state: latest
+    when: ansible_distribution == "Ubuntu" 
+
+  - name: install httpd and php packages on redhat
+    yum:
+      name:
+        - httpd
+        - php 
+      state: latest
+    when: ansible_distribution == "RedHat"
+
+
+- hosts: db_servers
+  become: true
+  tasks:
+  
+#  - name: Install MariaDB repository
+#      yum_repository:
+#        name: mariadb
+#        description: MariaDB Repository
+#        baseurl: https://downloads.mariadb.com/MariaDB/mariadb-10.5/yum/centos7-amd64
+#        gpgkey: https://downloads.mariadb.com/MariaDB/mariadb-10.5/yum/RPM-GPG-KEY-MariaDB
+#        gpgcheck: yes
+#        enabled: yes
+
+  - name: install mariadb package (RedHat)
+    yum: 
+      name: 
+        - mariadb
+      state: present
+    when: ansible_distribution == "RedHat"
+
+
+  - name: install mariadb package  (Ubuntu)
+    apt:
+      name: mariadb-server
+      state: latest
+    when: ansible_distribution == "Ubuntu"

@@ -1,4 +1,7 @@
 
-[webservers]
-192.168.31.149 ansible_ssh_user=msrbinovski ansible_ssh_private_key_file=~/.ssh/ansible
-192.168.31.150 ansible_ssh_user=msrbinovski ansible_ssh_private_key_file=~/.ssh/ansible
+[web_servers]
+192.168.31.149 ansible_ssh_user=msrbinovski ansible_ssh_private_key_file=~/.ssh/ansible apache_package=httpd php_package=php
+192.168.31.150 ansible_ssh_user=msrbinovski ansible_ssh_private_key_file=~/.ssh/ansible apache_package=httpd php_package=php
+
+
+# here we will have machines which are with different OS

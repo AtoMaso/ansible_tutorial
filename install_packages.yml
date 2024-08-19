@@ -4,33 +4,16 @@
   become: true
   tasks:
 
-  - name: install net-tools package
-    yum:
-      name: net-tools
+  - name: install apache2 or httpd and php packages
+    package:  # generic package manager , it can be yum, apt, apt-get and so on
+      name:
+        - "{{ apache_package }}" # the se are variable whhich are defined in the inventory       
+        - "{{ php_package }}"    # same here
       state: latest
-    when: ansible_distribution == "RedHat" 
+      update_cache: yes
+   # when: ansible_distribution == "RedHat" we dont need as OS is covered
 
-  - name: install php package
-    yum:
-      name: php
-      state: latest
-    when: ansible_distribution == "RedHat"
 
-  - name: install httpd package
-    yum:
-      name: httpd
-      state: latest
-    when: ansible_distribution == "RedHat"
+ 
 
-  - name: install apache2 package
-    apt:
-      name: apache2
-      state: latest
-    when: ansible_distribution == "Ubuntu"
-
-  - name: install php package
-    apt:
-      name: libapache2-mod-php
-      state: latest
-    when: ansible_distribution == "Ubuntu"
 
