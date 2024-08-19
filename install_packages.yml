@@ -8,9 +8,29 @@
     yum:
       name: net-tools
       state: latest
+    when: ansible_distribution == "RedHat" 
 
-  - name: install make package
+  - name: install php package
     yum:
-      name: make
+      name: php
       state: latest
+    when: ansible_distribution == "RedHat"
+
+  - name: install httpd package
+    yum:
+      name: httpd
+      state: latest
+    when: ansible_distribution == "RedHat"
+
+  - name: install apache2 package
+    apt:
+      name: apache2
+      state: latest
+    when: ansible_distribution == "Ubuntu"
+
+  - name: install php package
+    apt:
+      name: libapache2-mod-php
+      state: latest
+    when: ansible_distribution == "Ubuntu"
 
